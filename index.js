@@ -28,6 +28,7 @@ async function getSanityData() {
 
 async function render(filename)
 {
+  fs.writeFileSync('./dist/index.html', '')
   var source   = fs.readFileSync(filename,'utf8').toString();
   var template = Handlebars.compile(source);
   const data = await getSanityData();
