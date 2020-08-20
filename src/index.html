@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ about.title }}</title>
+</head>
+<body>
+    <h1>The HTML website of {{ about.fullName }}</h1>
+    {{{ about.content }}}
+    <ul>
+        {{#each streamData}}
+            <li>{{ this.title }}</li>
+        {{/each}}
+    </ul>
+
+
+    <h2>Bryan is on the internet</h2>
+    <ul>
+        {{#each about.externalLinks }}
+            <li><a href="{{ this.href }}">{{ this.text }}</a></li>
+        {{/each}}
+
+    </ul>
+</body>
+</html>
