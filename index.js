@@ -14,7 +14,8 @@ async function getSanityData() {
     return await data
 }
 
-function buildHTML(source, data) {
+function buildHTML(filename, data) {
+    const source = fs.readFileSync(filename,'utf8').toString();
     const template = Handlebars.compile(source);
     const output = template(data);
 
@@ -29,9 +30,8 @@ function writeFile(destination, html) {
 }
 
 async function render(filename) {
-    const source = fs.readFileSync(filename,'utf8').toString();
     const data = await getSanityData();
-    const html = buildHTML(source, data)
+    const html = buildHTML(filename, data)
     
     writeFile('./dist/index.html', html)
 }
