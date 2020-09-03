@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -e js,html  \"npm run build \"",
-    "build": "node index.js",
+    "build": "node index.js && cd studio && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "nodemonConfig": {
-    "ignore": ["dist/*"]
+    "ignore": [
+      "dist/*"
+    ]
   },
   "keywords": [],
   "author": "",

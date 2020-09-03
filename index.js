@@ -1,7 +1,31 @@
 const fs = require('fs');
+const path = require('path');
 const Handlebars = require('handlebars');
 const client = require('./utils/SanityClient')
-const blocksToHtml = require('@sanity/block-content-to-html')
+const blocksToHtml = require('@sanity/block-content-to-html');
+
+function prepare() {
+    if (!fs.existsSync('dist')){
+        fs.mkdirSync('dist');
+    }
+}
+
+function getSrcFiles(srcDir) {
+    const directory = path.join(__dirname, srcDir);
+    let fileList = []
+    // fs.readdir()
+
+    return fs.readdirSync(directory, function (err, files) {
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        } 
+        files.forEach(function (file) {
+            fileList.push(file) 
+        });
+    });
+
+}
+
 
 async function getSanityData() {
     const query = `{
@@ -29,14 +53,17 @@ function writeFile(destination, html) {
     });
 }
 
-async function render(filename) {
+async function main(src, dist) {
+    prepare();
     const data = await getSanityData();
-    const html = buildHTML(filename, data)
+    const html = buildHTML(src, data)
     
-    writeFile('./dist/index.html', html)
-}
+    fs.writeFile(dist, html, function (err) {
+        if (err) return console.log(err);
+        console.log('index.html created');
+    });}
 
-render('./src/index.html');
+main('./src/index.html', './dist/index.html');
 
 
 
