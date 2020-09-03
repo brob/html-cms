@@ -8,7 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build ../dist/admin -y",
+    "build": "npx sanity build ../dist/admin -y",
     "test": "sanity check"
   },
   "keywords": [
